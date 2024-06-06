@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import FormFilter from './components/FormFilter.vue'
 import CharacterCard from './components/CharacterCard.vue'
-import FilterForm from './components/FilterForm.vue'
 import PaginationWidget from './components/PaginationWidget.vue'
 import type { Character } from './types/characterTypes'
 
@@ -29,12 +29,14 @@ const getCharacters = async () => {
 }
 
 const filterCharacters = (filterData: { name: string; status: string }) => {
-  filteredCharacters.value = characters.value.filter((character) => {
-    return (
-      character.name.toLowerCase().includes(filterData.name.toLowerCase()) &&
-      character.status.toLowerCase().includes(filterData.status.toLowerCase())
-    )
-  })
+  if (characters.value) {
+    filteredCharacters.value = characters.value.filter((character) => {
+      return (
+        character.name.toLowerCase().includes(filterData.name.toLowerCase()) &&
+        character.status.toLowerCase().includes(filterData.status.toLowerCase())
+      )
+    })
+  }
 }
 
 const changePage = (direction: 'next' | 'prev') => {
@@ -58,7 +60,7 @@ onMounted(getCharacters)
         </div>
       </div>
       <div class="flex flex-col gap-y-4 items-center w-full">
-        <FilterForm @filter="filterCharacters" />
+        <FormFilter @filter="filterCharacters" />
         <PaginationWidget :currentPage="currentPage" @changePage="changePage" />
         <div v-auto-animate class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <CharacterCard

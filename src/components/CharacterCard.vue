@@ -55,7 +55,6 @@ onMounted(() => {
           <h2 class="font-medium text-lg">{{ character.location.name }}</h2>
         </div>
         <div>
-          <!-- first seen in -->
           <p class="text-gray-400 font-medium">First seen in:</p>
           <h2 class="font-medium text-lg">{{ episode?.name || 'Pilot' }}</h2>
         </div>
