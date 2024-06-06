@@ -3,7 +3,7 @@ defineProps<{
   currentPage: number
 }>()
 
-const emit = defineEmits(['prev', 'next'])
+defineEmits(['changePage'])
 </script>
 
 <template>
